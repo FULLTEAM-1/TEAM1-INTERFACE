@@ -56,16 +56,16 @@ public class DBManager {
         return DriverManager.getConnection(url, user, password);
         // getGroupwareConnection 클래스 실행되면 JDBC 드라이버에 (url,user,password) 등록 + 런타임에러 예외처리 + 에러원인
     }
-//
-//    public static int    getFetchSize()           { return 100; } 
-//    /* TODO : 한 번에 처리할 수 있는 행의 수 설정 */ 
-//    public static int    getMaxRetry()            { return 3;   } 
-//    /* TODO : 재시도 횟수 설정 */
-//    
-//    /** 계정 초기 비밀번호 suffix — empId + 이 값을 SHA-256 해시한 게 pwd_hash */
-//    public static String getInitPasswordSuffix() { return "1234"; } 
-//    /* TODO : 초기 비밀번호 값 설정 */
-//
+
+    public static int    getFetchSize()           { return 100; } 
+    /* TODO : 한 번에 처리할 수 있는 행의 수 설정 */ 
+    public static int    getMaxRetry()            { return 3;   } 
+    /* TODO : 재시도 횟수 설정 */
+    
+    /** 계정 초기 비밀번호 suffix — empId + 이 값을 SHA-256 해시한 게 pwd_hash */
+    public static String getInitPasswordSuffix() { return "1234"; } 
+    /* TODO : 초기 비밀번호 값 설정 */
+
 //    /** AutoCloseable 자원 여러 개 안전 close */
 //    public static void close(AutoCloseable... closeables) {
 //    	/* TODO : 연결 종료 후 JDBC driver 자동으로 종료 */
