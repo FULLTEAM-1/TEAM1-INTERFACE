@@ -35,19 +35,31 @@ public class IfMonitorServlet extends HttpServlet {
         accountDAO = new AccountDAO();	// 계정(Account) DAO 인스턴스 생성
     }
 
+
+    // HTTP POST 요청 처리 메서드
+    // 브라우저가 GET /monitor/list_ 요청 시 호출
+    // 3가지 목록 데이터를 DB에서 읽어 request에 담아 JSP 포워딩
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        System.out.println("GET /monitor/list");
+    	// TODO
+        System.out.println("GET /monitor/list");	// 서버 콘솔에 요청 수신 로그 출력
 
         try {
-            req.setAttribute("outboxList",  outboxDAO.listAll());
+        	// 발신함 전체 목록 조회. listAll()이 반환한 List를 "outboxList" 키로 request에 저장
+            req.setAttribute("outboxList",  outboxDAO.listAll());	
+            // 수신함 전체 목록 조회. listAll()이 반환한 List를 "inboxList" 키로 request에 저장.
             req.setAttribute("inboxList",   inboxDAO.listAll());
+            // 계정 전체 목록 조회. listAccounts()가 반환한 List를 "accountList" 키로 저장.
             req.setAttribute("accountList", accountDAO.listAccounts());
         } catch (SQLException e) {
+        	// DB 오류 처리 서버 콘솔 출력.
             e.printStackTrace();
+            // 오류 메시지를 클라이언트에게 전송.
             req.setAttribute("error", "조회 오류: " + e.getMessage());
         }
+        // 화면전환(Forward). 데이터를 담은 request(req)와 response(resp) 객체를 가지고 지정된 JSP 페이지로 이동.
+        // 브라우저 URL 바뀌지 않고 request 속성 그대로 유지
         req.getRequestDispatcher("/monitor/list.jsp").forward(req, resp);
     }
 }
