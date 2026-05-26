@@ -77,10 +77,13 @@ public class OutboxDAO {
 
     public int markFail(long outboxId, String errMsg) throws SQLException {
     	/* TODO */
+    	// DB 연결 및 SQL 실행 준비
         try (Connection conn = DBManager.getHrmConnection();
              PreparedStatement pstmt = conn.prepareStatement(SQL_MARK_FAIL)) {
+        	// 쿼리 파라미터 세팅
             pstmt.setString(1, errMsg);
             pstmt.setLong  (2, outboxId);
+            // 업데이트 실행 및 결과 반환
             return pstmt.executeUpdate();
         }
     }
