@@ -35,7 +35,7 @@ public class DBManager {
             throw new RuntimeException("DBManager.getHrmConnection Class.forName..." + e.getCause());
         }
         return DriverManager.getConnection(url, user, password);
-        // getHrmConnection 클래스 실행되면 JDBC 드라이버에 (url,user,password) 등록 + 런타임에러 예외처리 + 에러원인
+        // getHrmConnection 클래스 실행되면 JDBC 드라이버에 (url,user,password) 접속 + 런타임에러 예외처리 + 에러원인
         
     }
 
@@ -54,7 +54,7 @@ public class DBManager {
             throw new RuntimeException("DBManager.getGroupwareConnection Class.forName..." + e.getCause());
         }
         return DriverManager.getConnection(url, user, password);
-        // getGroupwareConnection 클래스 실행되면 JDBC 드라이버에 (url,user,password) 등록 + 런타임에러 예외처리 + 에러원인
+        // getGroupwareConnection 클래스 실행되면 JDBC 드라이버에 (url,user,password) 접속 + 런타임에러 예외처리 + 에러원인
     }
 
     public static int    getFetchSize()           { return 100; } 
