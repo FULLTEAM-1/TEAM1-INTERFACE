@@ -39,23 +39,23 @@ public class DBManager {
         
     }
 
-//    /** 수신측 GroupwareDB Connection */
-//    public static Connection getGroupwareConnection() throws SQLException {
-//    	// TODO
-//        String driver   = "com.mysql.cj.jdbc.Driver";
-//        String url      = "jdbc:mysql://localhost:3306/GroupwareDB?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8";
-//        String user     = "ifuserx";
-//        String password = "ifx1234!";
-//        // db.properties에 입력한 driver + gw.url + gw.user+ gw.password 값을 각 매개변수에 담기
-//
-//        try {
-//            Class.forName(driver);
-//        } catch (ClassNotFoundException e) {
-//            throw new RuntimeException("DBManager.getGroupwareConnection Class.forName..." + e.getCause());
-//        }
-//        return DriverManager.getConnection(url, user, password);
-//        // getGroupwareConnection 클래스 실행되면 JDBC 드라이버에 (url,user,password) 등록 + 런타임에러 예외처리 + 에러원인
-//    }
+    /** 수신측 GroupwareDB Connection */
+    public static Connection getGroupwareConnection() throws SQLException {
+    	// TODO
+        String driver   = "com.mysql.cj.jdbc.Driver";
+        String url      = "jdbc:mysql://localhost:3306/GroupwareDB?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8";
+        String user     = "ifuserx";
+        String password = "ifx1234!";
+        // db.properties에 입력한 driver + gw.url + gw.user+ gw.password 값을 각 매개변수에 담기
+
+        try {
+            Class.forName(driver);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("DBManager.getGroupwareConnection Class.forName..." + e.getCause());
+        }
+        return DriverManager.getConnection(url, user, password);
+        // getGroupwareConnection 클래스 실행되면 JDBC 드라이버에 (url,user,password) 등록 + 런타임에러 예외처리 + 에러원인
+    }
 //
 //    public static int    getFetchSize()           { return 100; } 
 //    /* TODO : 한 번에 처리할 수 있는 행의 수 설정 */ 
