@@ -66,17 +66,17 @@ public class DBManager {
     public static String getInitPasswordSuffix() { return "1234"; } 
     /* TODO : 초기 비밀번호 값 설정 */
 
-//    /** AutoCloseable 자원 여러 개 안전 close */
-//    public static void close(AutoCloseable... closeables) {
-//    	/* TODO : 연결 종료 후 JDBC driver 자동으로 종료 */
-//        for (AutoCloseable c : closeables) {
-//            if (c != null) {
-//                try { c.close(); }
-//                catch (Exception e) { e.printStackTrace(); }
-//            }
-//        }
-//        // 자동 종료 되지않을시 예외처리
-//    }
+    /** AutoCloseable 자원 여러 개 안전 close */
+    public static void close(AutoCloseable... closeables) {
+    	/* TODO : 연결 종료 후 JDBC driver 자동으로 종료 */
+        for (AutoCloseable c : closeables) {
+            if (c != null) {
+                try { c.close(); }
+                catch (Exception e) { e.printStackTrace(); }
+            }
+        }
+        // close() 처리가 되지 않을시 예외처리
+    }
 }
 
 
