@@ -27,11 +27,12 @@ public class IfMonitorServlet extends HttpServlet {
     private InboxDAO   inboxDAO;	// 수신함(Inbox) 데이터 조회 DAO
     private AccountDAO accountDAO; 	// 계정(Account) 목록 조회 DAO
 
+    // 서블릿 초기화. 사용할 DAO 객체들을 미리 생성
     @Override
-    public void init() {
-        outboxDAO  = new OutboxDAO();
-        inboxDAO   = new InboxDAO();
-        accountDAO = new AccountDAO();
+    public void init() { // init(): 서블릿이 메모리에 로드될 때 최초 1회 실행되는 초기화 메서드
+        outboxDAO  = new OutboxDAO();	// 발신함(Outbox) DAO 인스턴스 생성
+        inboxDAO   = new InboxDAO();	// 수신함(Inbox) DAO 인스턴스 생성
+        accountDAO = new AccountDAO();	// 계정(Account) DAO 인스턴스 생성
     }
 
     @Override
