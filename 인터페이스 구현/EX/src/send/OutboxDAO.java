@@ -37,12 +37,17 @@ public class OutboxDAO {
 
     public List<Outbox> fetchPending(int maxRetry, int limit) throws SQLException {
     	/* TODO */
+    	// 저장 공간 준비
         List<Outbox> out = new ArrayList<>();
+        // DB 연결 및 SQL 실행 준비
         try (Connection conn = DBManager.getHrmConnection();
              PreparedStatement pstmt = conn.prepareStatement(SQL_FETCH_PENDING)) {
+        	// 쿼리 파라미터 세팅
             pstmt.setInt(1, maxRetry);
             pstmt.setInt(2, limit);
+            // SQL 쿼리 실행 및 결과셋(ResultSet) 획득
             try (ResultSet rs = pstmt.executeQuery()) {
+            	// 객체 변환 후 데이터 추출
                 while (rs.next()) {
                     Outbox o = new Outbox();
                     o.outboxId = rs.getLong("outbox_id");
@@ -54,14 +59,18 @@ public class OutboxDAO {
                 }
             }
         }
+        // 결과 반환하고 자원 해제
         return out;
     }
 
     public int markSuccess(long outboxId) throws SQLException {
     	/* TODO */
+    	
         try (Connection conn = DBManager.getHrmConnection();
              PreparedStatement pstmt = conn.prepareStatement(SQL_MARK_SUCCESS)) {
-            pstmt.setLong(1, outboxId);
+            
+        	pstmt.setLong(1, outboxId);
+        	
             return pstmt.executeUpdate();
         }
     }
