@@ -41,6 +41,8 @@ public class AccountBatchServlet extends HttpServlet {
 
     private void process(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+    	
+    	//TODO : 배치 시작 -> pending 조회 -> processOne() 반복 처리 -> 통계 누적 -> JSP forward
         System.out.println("/recv/batch 배치 시작");
 
         int totalRead = 0, success = 0, fail = 0, skip = 0;
@@ -70,6 +72,17 @@ public class AccountBatchServlet extends HttpServlet {
         req.getRequestDispatcher("/recv/batchResult.jsp").forward(req, resp);
     }
 
+    // TODO :
+    // processOne 구현()
+    // 1) payload JSON 파싱 + empId/deptCd 추출
+    // 2) REQUIRED_MISSING / EMP_ID_FORAMT 검증
+    // 3) Connection 생성 + setAutoCommit(false)
+    // 4) inbox insert + SQLState 23000 중복(SKIP) 관리
+    // 5) account 생성 -> commit -> markSuccess()
+    // 6) SQLException 발생 시 rollback + 오류코드 분류
+    // 7) 별도 connection으로 inbox 실패 기록
+    // 8) markFail()
+    // 9) finally에서 autoCommit 복구 + close
     private String processOne(Outbox o) {
         long startMs = System.currentTimeMillis();
         Connection conn = null;
