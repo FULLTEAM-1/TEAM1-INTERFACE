@@ -102,10 +102,13 @@ public class OutboxDAO {
 
     public List<Outbox> listAll() throws SQLException {
     	/* TODO */
+    	// 저장 공간 준비
         List<Outbox> out = new ArrayList<>();
+        // DB 연결, SQL 실행 및 결과셋(ResultSet) 동시 준비
         try (Connection conn = DBManager.getHrmConnection();
              PreparedStatement pstmt = conn.prepareStatement(SQL_LIST_ALL);
              ResultSet rs = pstmt.executeQuery()) {
+        	// 전체 데이터 추출 
             while (rs.next()) {
                 Outbox o = new Outbox();
                 o.outboxId = rs.getLong("outbox_id");
@@ -119,6 +122,7 @@ public class OutboxDAO {
                 out.add(o);
             }
         }
+        // 결과 반환
         return out;
     }
 
