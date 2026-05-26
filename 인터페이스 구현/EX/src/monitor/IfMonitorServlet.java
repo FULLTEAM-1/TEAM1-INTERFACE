@@ -13,12 +13,19 @@ import recv.AccountDAO;
 import recv.InboxDAO;
 import send.OutboxDAO;
 
-@WebServlet("/monitor/list_")
+
+//----------------------------------------------------------------
+//발신함(Outbox), 수신함(Inbox), 계정(Account) 데이터를 한 번에 조회하여 
+//"/monitor/list.jsp" 뷰로 전달하는 MVC 패턴의 컨트롤러
+//----------------------------------------------------------------
+
+@WebServlet("/monitor/list_")	// "/monitor/list_" URL로 요청 보내면 이 서블릿이 실행되도록 매핑
 public class IfMonitorServlet extends HttpServlet {
 
-    private OutboxDAO  outboxDAO;
-    private InboxDAO   inboxDAO;
-    private AccountDAO accountDAO;
+	// 데이터베이스 연동 처리할 DAO 객체 선언
+    private OutboxDAO  outboxDAO;	// 발신함(Outbox) 데이터 조회 DAO
+    private InboxDAO   inboxDAO;	// 수신함(Inbox) 데이터 조회 DAO
+    private AccountDAO accountDAO; 	// 계정(Account) 목록 조회 DAO
 
     @Override
     public void init() {
