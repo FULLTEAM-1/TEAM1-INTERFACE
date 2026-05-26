@@ -6,8 +6,12 @@ import java.util.List;
 import common.DBManager;
 
 /**
+ * [시험 학생용] if_outbox DAO — ☆ TODO
  * if_outbox DAO — ★ 정답
  *
+ * <p>구현 메서드 5개: fetchPending / markSuccess / markFail / reopen / listAll</p>
+ *
+ * <p>정답: ../EX_답/src/send/OutboxDAO.java</p>
  * <pre>
  * 능력단위요소 3 / 수행준거 3.1 (검증도구)
  * </pre>
@@ -32,6 +36,7 @@ public class OutboxDAO {
             "FROM if_outbox ORDER BY outbox_id DESC LIMIT 100";
 
     public List<Outbox> fetchPending(int maxRetry, int limit) throws SQLException {
+    	/* TODO */
         List<Outbox> out = new ArrayList<>();
         try (Connection conn = DBManager.getHrmConnection();
              PreparedStatement pstmt = conn.prepareStatement(SQL_FETCH_PENDING)) {
@@ -53,6 +58,7 @@ public class OutboxDAO {
     }
 
     public int markSuccess(long outboxId) throws SQLException {
+    	/* TODO */
         try (Connection conn = DBManager.getHrmConnection();
              PreparedStatement pstmt = conn.prepareStatement(SQL_MARK_SUCCESS)) {
             pstmt.setLong(1, outboxId);
@@ -61,6 +67,7 @@ public class OutboxDAO {
     }
 
     public int markFail(long outboxId, String errMsg) throws SQLException {
+    	/* TODO */
         try (Connection conn = DBManager.getHrmConnection();
              PreparedStatement pstmt = conn.prepareStatement(SQL_MARK_FAIL)) {
             pstmt.setString(1, errMsg);
@@ -70,6 +77,7 @@ public class OutboxDAO {
     }
 
     public int reopen(long outboxId) throws SQLException {
+    	/* TODO */
         try (Connection conn = DBManager.getHrmConnection();
              PreparedStatement pstmt = conn.prepareStatement(SQL_REOPEN)) {
             pstmt.setLong(1, outboxId);
@@ -78,6 +86,7 @@ public class OutboxDAO {
     }
 
     public List<Outbox> listAll() throws SQLException {
+    	/* TODO */
         List<Outbox> out = new ArrayList<>();
         try (Connection conn = DBManager.getHrmConnection();
              PreparedStatement pstmt = conn.prepareStatement(SQL_LIST_ALL);
