@@ -36,6 +36,13 @@ public class AccountDAO {
      */
     public void createAccountInTx(Connection conn, String empId, String deptCd, String txNo)
             throws SQLException {
+    	
+    	// TODO :
+    	// 1) SQL_CHECK_DEPT로 부서 존재 확인
+    	// 2) 초기 비밀번호 = empId + DBManager.getInitPasswordSuffix()
+    	// 3) SHA-256 해시 생성
+    	// 4) SQL_INSERT_ACCOUNT 실행 (empId, pwdHash, deptCd)
+    	// 5) SQL_INSERT_HIST 실행 (empId, txNo)
 
         // 부서 존재 확인
         try (PreparedStatement pstmt = conn.prepareStatement(SQL_CHECK_DEPT)) {
@@ -66,6 +73,14 @@ public class AccountDAO {
 
     /** 모니터링 — 계정 목록 (pwd_hash 노출 X) */
     public List<Map<String, Object>> listAccounts() throws SQLException {
+    	
+    	// TODO :
+    	// SQL_LIST 실행
+    	// Connection / PrepareedStatement / ResultSet 생성
+    	// 조회 결과를 List<Map<String, Object>>로 변환
+    	// pwd_hash 제외(account_id, dept_cd, status, create_dt만 저장)
+    	// 결과 List 반환
+    	
         List<Map<String, Object>> out = new ArrayList<>();
         try (Connection conn = DBManager.getGroupwareConnection();
              PreparedStatement pstmt = conn.prepareStatement(SQL_LIST);
