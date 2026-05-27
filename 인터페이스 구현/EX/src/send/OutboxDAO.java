@@ -6,8 +6,12 @@ import java.util.List;
 import common.DBManager;
 
 /**
+ * [시험 학생용] if_outbox DAO — ☆ TODO
  * if_outbox DAO — ★ 정답
  *
+ * <p>구현 메서드 5개: fetchPending / markSuccess / markFail / reopen / listAll</p>
+ *
+ * <p>정답: ../EX_답/src/send/OutboxDAO.java</p>
  * <pre>
  * 능력단위요소 3 / 수행준거 3.1 (검증도구)
  * </pre>
@@ -32,12 +36,18 @@ public class OutboxDAO {
             "FROM if_outbox ORDER BY outbox_id DESC LIMIT 100";
 
     public List<Outbox> fetchPending(int maxRetry, int limit) throws SQLException {
+    	/* TODO */
+    	// 저장 공간 준비
         List<Outbox> out = new ArrayList<>();
+        // DB 연결 및 SQL 실행 준비
         try (Connection conn = DBManager.getHrmConnection();
              PreparedStatement pstmt = conn.prepareStatement(SQL_FETCH_PENDING)) {
+        	// 쿼리 파라미터 세팅
             pstmt.setInt(1, maxRetry);
             pstmt.setInt(2, limit);
+            // SQL 쿼리 실행 및 결과셋(ResultSet) 획득
             try (ResultSet rs = pstmt.executeQuery()) {
+            	// 객체 변환 후 데이터 추출
                 while (rs.next()) {
                     Outbox o = new Outbox();
                     o.outboxId = rs.getLong("outbox_id");
@@ -49,39 +59,56 @@ public class OutboxDAO {
                 }
             }
         }
+        // 결과 반환하고 자원 해제
         return out;
     }
 
     public int markSuccess(long outboxId) throws SQLException {
+    	/* TODO */
+    	// DB 연결 및 SQL 실행 준비
         try (Connection conn = DBManager.getHrmConnection();
              PreparedStatement pstmt = conn.prepareStatement(SQL_MARK_SUCCESS)) {
-            pstmt.setLong(1, outboxId);
+        	// 쿼리 파라미터 세팅
+        	pstmt.setLong(1, outboxId);
+        	// 업데이트 실행 및 결과 반환
             return pstmt.executeUpdate();
         }
     }
 
     public int markFail(long outboxId, String errMsg) throws SQLException {
+    	/* TODO */
+    	// DB 연결 및 SQL 실행 준비
         try (Connection conn = DBManager.getHrmConnection();
              PreparedStatement pstmt = conn.prepareStatement(SQL_MARK_FAIL)) {
+        	// 쿼리 파라미터 세팅
             pstmt.setString(1, errMsg);
             pstmt.setLong  (2, outboxId);
+            // 업데이트 실행 및 결과 반환
             return pstmt.executeUpdate();
         }
     }
 
     public int reopen(long outboxId) throws SQLException {
+    	/* TODO */
+    	// DB 연결 및 SQL 실행 준비
         try (Connection conn = DBManager.getHrmConnection();
              PreparedStatement pstmt = conn.prepareStatement(SQL_REOPEN)) {
+        	// 쿼리 파라미터 세팅
             pstmt.setLong(1, outboxId);
+            // 업데이트 실행 및 결과 반환
             return pstmt.executeUpdate();
         }
     }
 
     public List<Outbox> listAll() throws SQLException {
+    	/* TODO */
+    	// 저장 공간 준비
         List<Outbox> out = new ArrayList<>();
+        // DB 연결, SQL 실행 및 결과셋(ResultSet) 동시 준비
         try (Connection conn = DBManager.getHrmConnection();
              PreparedStatement pstmt = conn.prepareStatement(SQL_LIST_ALL);
              ResultSet rs = pstmt.executeQuery()) {
+        	// 전체 데이터 추출 
             while (rs.next()) {
                 Outbox o = new Outbox();
                 o.outboxId = rs.getLong("outbox_id");
@@ -95,6 +122,7 @@ public class OutboxDAO {
                 out.add(o);
             }
         }
+        // 결과 반환
         return out;
     }
 
