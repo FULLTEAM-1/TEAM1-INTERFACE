@@ -52,7 +52,7 @@ public class EmployeeDAO {
         	conn = DBManager.getHrmConnection();
             conn.setAutoCommit(false);
 
-        	// 파라미터 받기
+        	// 사원 정보 데이터 삽입
             try (PreparedStatement pstmt = conn.prepareStatement(SQL_INSERT_EMP)) {
                 pstmt.setString(1, emp.getEmpId());
                 pstmt.setString(2, emp.getEmpName());
