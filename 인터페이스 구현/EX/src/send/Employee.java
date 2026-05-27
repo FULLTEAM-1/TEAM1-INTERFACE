@@ -17,6 +17,7 @@ package send;
  */
 public class Employee {
 
+	// 6개 필드 선언
     private String empId;        // VARCHAR(12) E + YYYYMMDD + 3자리
     private String empName;      // VARCHAR(50) UTF-8
     private String deptCd;       // CHAR(4)
@@ -24,8 +25,10 @@ public class Employee {
     private String hireDt;       // CHAR(8) YYYYMMDD
     private String email;        // VARCHAR(100)
 
+    // 기본 생성자 구현
     public Employee() {}
-
+    
+    // 전체 생성자 구현
     public Employee(String empId, String empName, String deptCd,
                     String position, String hireDt, String email) {
         this.empId    = empId;
@@ -36,6 +39,7 @@ public class Employee {
         this.email    = email;
     }
 
+    // getter / setter 메서드 구현
     public String getEmpId()             { return empId; }
     public void   setEmpId(String v)     { this.empId = v; }
     public String getEmpName()           { return empName; }
